@@ -26,8 +26,8 @@ Incorporate configuration settings to the application
 
 ### Links and Resources
 
-[GitHub Repo](https://github.com/bradydavenport/todo-app)
-[CodeSandbox](https://codesandbox.io/s/todo-app-0ktjiq)
+- [GitHub Repo](https://github.com/bradydavenport/todo-app)
+- [CodeSandbox](https://codesandbox.io/s/todo-app-0ktjiq)
 
 ![UML](/public/UML.png)
 
