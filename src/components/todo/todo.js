@@ -1,34 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import useForm from '../../hooks/form.js';
+import { SettingsContext } from '../../Context/Settings';
+import Header from '../Header/Header'
+import List from '../List/List';
 
 import { v4 as uuid } from 'uuid';
 
 const ToDo = () => {
 
+  const settings = useContext(SettingsContext);
   const [defaultValues] = useState({
     difficulty: 4,
   });
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
-  const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
-  function addItem(item) {
+  const addItem = (item) => {
     item.id = uuid();
-    item.complete = false;
+    item.complete = settings.completed;
     console.log(item);
     setList([...list, item]);
   }
 
-  function deleteItem(id) {
-    const items = list.filter( item => item.id !== id );
+  const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
+
+  const deleteItem = (id) => {
+    const items = list.filter(item => item.id !== id);
     setList(items);
   }
 
-  function toggleComplete(id) {
+  const toggleComplete = (id) => {
 
-    const items = list.map( item => {
-      if ( item.id == id ) {
-        item.complete = ! item.complete;
+    const items = list.map(item => {
+      if (item.id === id) {
+        item.complete = !item.complete;
       }
       return item;
     });
@@ -45,9 +50,7 @@ const ToDo = () => {
 
   return (
     <>
-      <header>
-        <h1>To Do List: {incomplete} items pending</h1>
-      </header>
+      <Header incomplete={incomplete} />
 
       <form onSubmit={handleSubmit}>
 
@@ -73,7 +76,9 @@ const ToDo = () => {
         </label>
       </form>
 
-      {list.map(item => (
+      < List list={list} />
+
+      {/* {list.map(item => (
         <div key={item.id}>
           <p>{item.text}</p>
           <p><small>Assigned to: {item.assignee}</small></p>
@@ -81,7 +86,7 @@ const ToDo = () => {
           <div onClick={() => toggleComplete(item.id)}>Complete: {item.complete.toString()}</div>
           <hr />
         </div>
-      ))}
+      ))} */}
 
     </>
   );
