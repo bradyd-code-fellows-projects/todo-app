@@ -8,28 +8,30 @@ import { v4 as uuid } from 'uuid';
 
 const ToDo = () => {
 
-  const settings = useContext(SettingsContext);
   const [defaultValues] = useState({
     difficulty: 4,
   });
   const [list, setList] = useState([]);
+  const [showList, setShowList] = useState(false);
   const [incomplete, setIncomplete] = useState([]);
+  const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
+  const settings = useContext(SettingsContext);
 
-  const addItem = (item) => {
+  function addItem(item) {
     item.id = uuid();
     item.complete = settings.completed;
     console.log(item);
     setList([...list, item]);
+    setShowList(true);
   }
 
-  const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
-  const deleteItem = (id) => {
+  function deleteItem(id) {
     const items = list.filter(item => item.id !== id);
     setList(items);
   }
 
-  const toggleComplete = (id) => {
+  function toggleComplete(id) {
 
     const items = list.map(item => {
       if (item.id === id) {
@@ -76,17 +78,7 @@ const ToDo = () => {
         </label>
       </form>
 
-      < List list={list} />
-
-      {/* {list.map(item => (
-        <div key={item.id}>
-          <p>{item.text}</p>
-          <p><small>Assigned to: {item.assignee}</small></p>
-          <p><small>Difficulty: {item.difficulty}</small></p>
-          <div onClick={() => toggleComplete(item.id)}>Complete: {item.complete.toString()}</div>
-          <hr />
-        </div>
-      ))} */}
+      {showList && <List list={list} toggleComplete={toggleComplete}/>}
 
     </>
   );

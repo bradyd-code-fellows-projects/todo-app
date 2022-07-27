@@ -1,12 +1,16 @@
-import { createContext, useState } from "react";
+import React, { useState } from "react";
 
-export const SettingsContext = createContext()
+export const SettingsContext = React.createContext();
 
 export default function SettingsProvider({children}) {
 
     const [completed, setCompleted] = useState(false)
     const [itemsPerScreen, setItemsPerScreen] = useState(3)
-    const [sortField, setSortField] = useState('')
+    const [sortField, setSortField] = useState('difficulty')
+
+    // const addCompletedItem = item => {
+        // use this to change state
+    // }
 
     const settings = {
         completed,
@@ -19,5 +23,5 @@ export default function SettingsProvider({children}) {
             {children}
         </SettingsContext.Provider>
     )
-    
+
 }
