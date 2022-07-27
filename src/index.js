@@ -1,17 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import SettingsProvider from './Context/Settings';
 
-import App from './app.js';
+import App from './App.js';
 
-class Main extends React.Component {
-  render() {
-    return(
-    <SettingsProvider>
-      <App />
-    </SettingsProvider>
-  )}
-}
-
-const rootElement = document.getElementById('root');
-ReactDOM.render(<Main />, rootElement);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <SettingsProvider>
+    <App />
+  </SettingsProvider>
+);
