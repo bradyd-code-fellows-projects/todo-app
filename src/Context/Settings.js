@@ -8,14 +8,30 @@ export default function SettingsProvider({children}) {
     const [itemsPerScreen, setItemsPerScreen] = useState(3)
     const [sortField, setSortField] = useState('difficulty')
 
-    // const addCompletedItem = item => {
-        // use this to change state
-    // }
+    const addCompletedItem = item => {
+        setCompleted(!completed);
+    }
+
+    const updateItemsPerScreen = (item) => {
+        setItemsPerScreen(item)
+    }
+
+    const updateSortField = value => {
+        setSortField(value);
+    }
+
+    const setUserPreferences = () => {
+        // let stringifiedPreferences = JSON.stringify(//user preferences);
+        // localStorage.setItem('User preferences', stringifiedPreferences);
+    }
 
     const settings = {
         completed,
         itemsPerScreen,
-        sortField
+        sortField,
+        addCompletedItem,
+        updateItemsPerScreen,
+        updateSortField
     }
 
     return (
