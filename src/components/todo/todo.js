@@ -19,7 +19,7 @@ const ToDo = () => {
 
   function addItem(item) {
     item.id = uuid();
-    item.complete = settings.completed;
+    item.completed = settings.completed;
     console.log(item);
     setList([...list, item]);
     setShowList(true);
@@ -35,7 +35,7 @@ const ToDo = () => {
 
     const items = list.map(item => {
       if (item.id === id) {
-        item.complete = !item.complete;
+        item.completed = !item.completed;
       }
       return item;
     });
@@ -45,7 +45,7 @@ const ToDo = () => {
   }
 
   useEffect(() => {
-    let incompleteCount = list.filter(item => !item.complete).length;
+    let incompleteCount = list.filter(item => !item.completed).length;
     setIncomplete(incompleteCount);
     document.title = `To Do List: ${incomplete}`;
   }, [list]);
@@ -78,7 +78,7 @@ const ToDo = () => {
         </label>
       </form>
 
-      {showList && <List list={list} toggleComplete={toggleComplete}/>}
+      {showList && <List list={list} toggleComplete={toggleComplete} />}
 
     </>
   );
