@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+const storage = JSON.parse(localStorage.getItem('todo'));
 
 export const SettingsContext = React.createContext();
 
-export default function SettingsProvider({children}) {
+export default function SettingsProvider({ children }) {
 
-    const [completed, setCompleted] = useState(false)
-    const [itemsPerScreen, setItemsPerScreen] = useState(3)
-    const [sortField, setSortField] = useState('difficulty')
+    const [completed, setCompleted] = useState(storage ? storage.completed : false);
+    const [itemsPerScreen, setItemsPerScreen] = useState(storage ? storage.itemsPerScreen : 3);
+    const [sortField, setSortField] = useState(storage ? storage.sortField : 'difficulty');
+    const [save, setSave] = useState('false');
 
-    const addCompletedItem = item => {
-        setCompleted(!completed);
+    const showCompletedItem = () => {
+        setCompleted(false ? true : false);
     }
 
-    const updateItemsPerScreen = (item) => {
-        setItemsPerScreen(item)
+    const updateItemsPerScreen = (quantity) => {
+        setItemsPerScreen(quantity);
     }
 
     const updateSortField = value => {
@@ -21,17 +24,21 @@ export default function SettingsProvider({children}) {
     }
 
     const setUserPreferences = () => {
-        // let stringifiedPreferences = JSON.stringify(//user preferences);
-        // localStorage.setItem('User preferences', stringifiedPreferences);
+        setSave(!save);
     }
+
+    useEffect(() => {
+        localStorage.setItem('todo', JSON.stringify({ completed, itemsPerScreen, sortField }))
+    }, [save]);
 
     const settings = {
         completed,
         itemsPerScreen,
         sortField,
-        addCompletedItem,
+        showCompletedItem,
         updateItemsPerScreen,
-        updateSortField
+        updateSortField,
+        setUserPreferences,
     }
 
     return (
