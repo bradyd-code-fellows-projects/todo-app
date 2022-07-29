@@ -1,4 +1,4 @@
-# LAB - Class 31, 32, 33
+# LAB - Class 31, 32, 33, 34
 
 ## Project: Todo app
 
@@ -47,6 +47,14 @@ In this final phase, we’ll be requiring that users be logged in, in order to s
 - As a user, I want to ensure that only fellow users that are allowed to “create”, based on their user type, can add new To Do Items
 - As a user, I want to ensure that only fellow users that are allowed to “update”, based on their user type, can mark To Do Items complete
 - As a user, I want to ensure that only fellow users that are allowed to “delete”, based on their user type, can delete new To Do Items
+
+#### Phase 4: API Integration (28 July 2022)
+
+#### Phase 4 Feature Tasks
+
+- Require users be logged in through a live authentication server in order to see to-do items
+- Based on user type, user will be allowed (or denied) to perform actions such as editing or deleting items
+- To-dos will be stored in a database and access via deployed API
 
 ### Links and Resources
 
