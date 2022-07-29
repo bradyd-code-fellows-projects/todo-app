@@ -12,7 +12,7 @@ export default function SettingsProvider({ children }) {
     const [save, setSave] = useState('false');
 
     const showCompletedItem = () => {
-        setCompleted(false ? true : false);
+        setCompleted(!completed);
     }
 
     const updateItemsPerScreen = (quantity) => {

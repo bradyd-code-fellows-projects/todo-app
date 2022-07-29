@@ -1,7 +1,8 @@
 import { useContext, useState } from 'react';
-import { FormGroup, Label, ControlGroup, RadioGroup, Radio } from '@blueprintjs/core';
+import { FormGroup, Label, ControlGroup, RadioGroup, Radio, Button, Card, Elevation } from '@blueprintjs/core';
 import { SettingsContext } from '../../Context/Settings';
 import useForm from '../../hooks/form';
+import './SettingsForm.scss'
 
 const SettingsForm = () => {
 
@@ -19,24 +20,16 @@ const SettingsForm = () => {
 
   return (
     <>
-      <FormGroup onSubmit={handleSubmit}>
+      <FormGroup id="prefsForm" onSubmit={handleSubmit} label="Change Preferences">
 
-        <Label id="change-prefs-form-label">Change Preferences</Label>
+        <ControlGroup>
 
-        <ControlGroup id="preferences">
-
-          <RadioGroup label="Show completed tasks in list?">            
-            <Radio
-            label="Show completed in list"
+          <RadioGroup
+            name="showCompleted"
             onChange={handleChange}
-            value="show">
-            </Radio>
-
-            <Radio
-            label="Don't show completed in list"
-            onChange={handleChange}
-            value="doNotShow">
-            </Radio>
+            label="Show completed tasks in list?" >
+            <Radio label="Show completed tasks in list" value="true" />
+            <Radio label="Don't show completed tasks in list" value="false" />
           </RadioGroup>
 
           <Label>
