@@ -44,6 +44,10 @@ const ToDo = () => {
 
   }
 
+  function radio(e) {
+
+  }
+
   useEffect(() => {
     let incompleteCount = list.filter(item => !item.completed).length;
     setIncomplete(incompleteCount);
